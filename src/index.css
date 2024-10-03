@@ -1,13 +1,80 @@
+/* Global Styles */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8; /* Light blue background */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff; /* White background for header */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  color: #2d5d34; /* Dark green for heading */
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #e3f7f2; /* Light teal for hero section */
+}
+
+.hero h2 {
+  font-size: 2.5em;
+  color: #2d5d34;
+}
+
+.hero button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #00c853; /* Bright green for buttons */
+  color: white;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Campaign List */
+.campaign-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.campaign-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px; /* Card width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.campaign-card h3 {
+  font-size: 1.5em;
+  color: #2d5d34;
+}
+
+.campaign-card p {
+  color: #555; /* Dark grey for text */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .campaign-list {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .campaign-card {
+      width: 90%; /* Full width on small screens */
+  }
 }
