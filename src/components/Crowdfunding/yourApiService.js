@@ -1,25 +1,28 @@
 // src/components/Crowdfunding/yourApiService.js
-import { ethers } from 'ethers'; // Import ethers to interact with the blockchain
+import { ethers } from 'ethers';
 import ContractABI from '../utils/contractABI.json'; // Adjust the path to your ABI file
 
-const CONTRACT_ADDRESS = '0xCfC462b1ed53255Bb4EAE4Ad384DA3f375A1fF4C'; // Your deployed contract address
+const CONTRACT_ADDRESS = '0x1EEff8aF771583036c60902a13817516794fD50C'; // Your deployed contract address
 
 export const getCampaigns = async () => {
   try {
-    const provider = new ethers.providers.Web3Provider(window.ethereum); // Ensure MetaMask is installed
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const contract = new ethers.Contract(CONTRACT_ADDRESS, ContractABI, provider);
     
-    // Call a function from your contract to get campaigns
-    const campaigns = await contract.getCampaigns(); // Replace with your contract's method
-    return campaigns.map(campaign => ({
-      id: campaign.id.toString(),
-      title: campaign.title,
-      description: campaign.description,
-      goal: ethers.utils.formatEther(campaign.goal), // Convert goal from Wei to ETH
-      raised: ethers.utils.formatEther(campaign.raised), // Convert raised from Wei to ETH
-    }));
+    const campaigns = [];
+    for (let i = 0; i < await contract.campaignCount(); i++) {
+      const campaignDetails = await contract.getCampaignDetails(i);
+      campaigns.push({
+        id: i.toString(),
+        title: campaignDetails.title,
+        description: campaignDetails.description,
+        goal: ethers.utils.formatEther(campaignDetails.target),
+        raised: ethers.utils.formatEther(campaignDetails.amountCollected),
+      });
+    }
+    return campaigns;
   } catch (error) {
     console.error("Error fetching campaigns:", error);
-    throw error; // Propagate the error to the parent component
+    throw error;
   }
 };
